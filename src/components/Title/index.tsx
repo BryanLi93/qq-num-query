@@ -1,7 +1,7 @@
 type TProps = {
-  text: string
-}
+  text: string;
+};
 
 export default function ({ text }: TProps) {
-  return <h1>{text}</h1>
+  return <h1>{text}</h1>;
 }
