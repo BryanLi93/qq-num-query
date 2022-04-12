@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 // import reportWebVitals from './reportWebVitals';
 
+// react18 写法由 ReactDOM.render(<App />, document.querySelector('#root'))，变更为此
 // ✅ correct ID passed
 const rootElement = document.getElementById('root') as Element;
 const root = createRoot(rootElement);
@@ -13,12 +14,6 @@ root.render(
     <App />
   </React.StrictMode>
 )
-// root.createRoot(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
