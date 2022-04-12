@@ -24,5 +24,7 @@ module.exports = {
     "react/react-in-jsx-scope": "off",
     // 允许组件匿名函数导出
     "react/display-name": [0, { ignoreTranspilerName: false }],
+    // node 使用 require
+    "@typescript-eslint/no-var-requires": "off",
   },
 };

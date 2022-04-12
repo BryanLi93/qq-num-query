@@ -5,8 +5,6 @@ type TProps = {
 };
 
 export default function ({ user }: TProps) {
-  console.log(user);
-
   return (
     <div className={Style["user-grid"]}>
       <div className="avatar">
