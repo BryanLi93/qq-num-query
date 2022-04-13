@@ -1,10 +1,11 @@
-import Title from "./components/Title";
-import QQInput from "./components/QQInput";
-import { useState } from "react";
-import UserGrid from "./components/UserGrid";
+import Style from "./App.module.sass";
 import { useRequest } from "ahooks";
+import { useState } from "react";
 import { getUserByQQ } from "./api/user";
 import LoadingTip from "./components/LoadingTip";
+import QQInput from "./components/QQInput";
+import Title from "./components/Title";
+import UserGrid from "./components/UserGrid";
 import Space from "./compotentsUI/Space";
 
 // const mockUser: User = {
@@ -17,6 +18,11 @@ function App() {
   // 接口返回的用户信息
   const [user, setUser] = useState<User>();
 
+  /**
+   * 接口请求优化方案
+   * 1. 输入内容校验、提示
+   * 2. 请求防抖
+   */
   const { run: getUserByQQRun, loading } = useRequest(getUserByQQ, {
     manual: true,
     onSuccess(res: User) {
@@ -28,10 +34,13 @@ function App() {
   });
 
   return (
-    <div className="App">
+    <div className={Style.App}>
+      {/* 标题 */}
       <Title text="QQ号查询" />
+      {/* 输入框 */}
       <QQInput onChange={(v) => getUserByQQRun(v)} />
       <Space />
+      {/* 用户信息显示 */}
       {user && (
         <>
           <UserGrid user={user} />
