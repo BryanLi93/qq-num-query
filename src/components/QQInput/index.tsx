@@ -1,4 +1,7 @@
 import { useDebounceFn } from "ahooks";
+import { useState } from "react";
+import Style from "./index.module.sass";
+import { isQQ } from "../../utils/validate";
 
 type TProps = {
   defaultValue?: string;
@@ -6,9 +9,15 @@ type TProps = {
 };
 
 export default function ({ defaultValue, onChange }: TProps) {
+  const [errMsg, setErrMsg] = useState("");
+
   const onChangeQQNumber = (value: string) => {
-    // TODO: 校验
-    onChange(value);
+    if (isQQ(value)) {
+      onChange(value);
+      setErrMsg("");
+      return;
+    }
+    setErrMsg("qq号格式有误，请检查");
   };
 
   const { run: debounceInputRun } = useDebounceFn(onChangeQQNumber, {
@@ -16,12 +25,16 @@ export default function ({ defaultValue, onChange }: TProps) {
   });
 
   return (
-    <>
-      <label>QQ</label>
+    <div className={Style["qq-input"]}>
+      <label htmlFor="input--qq">QQ</label>
       <input
+        id="input--qq"
+        className={errMsg ? "input--error" : ""}
+        maxLength={11}
         defaultValue={defaultValue}
         onInput={(e) => debounceInputRun(e.currentTarget.value)}
       />
-    </>
+      <span className="err-msg">{errMsg}</span>
+    </div>
   );
 }
