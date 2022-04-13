@@ -6,7 +6,6 @@ app.use(async (ctx) => {
   const path = ctx.request.path;
   if (path === "/api/qq.info") {
     const res = await getQQInfoByQQ(ctx.request.query.qq);
-    console.log(res);
     ctx.response.type = "json";
     ctx.response.body = res;
   }

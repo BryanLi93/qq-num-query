@@ -1,4 +1,3 @@
-import "./App.css";
 import Title from "./components/Title";
 import QQInput from "./components/QQInput";
 import { useState } from "react";
@@ -6,6 +5,7 @@ import UserGrid from "./components/UserGrid";
 import { useRequest } from "ahooks";
 import { getUserByQQ } from "./api/user";
 import LoadingTip from "./components/LoadingTip";
+import Space from "./compotentsUI/Space";
 
 // const mockUser: User = {
 //   name: "留白",
@@ -31,8 +31,14 @@ function App() {
     <div className="App">
       <Title text="QQ号查询" />
       <QQInput onChange={(v) => getUserByQQRun(v)} />
+      <Space />
+      {user && (
+        <>
+          <UserGrid user={user} />
+          <Space />
+        </>
+      )}
       {loading && <LoadingTip text="查询中..." />}
-      {user && <UserGrid user={user} />}
     </div>
   );
 }

@@ -32,6 +32,7 @@ export default function ({ defaultValue, onChange }: TProps) {
         className={errMsg ? "input--error" : ""}
         maxLength={11}
         defaultValue={defaultValue}
+        placeholder="请输入QQ号，位数5～11"
         onInput={(e) => debounceInputRun(e.currentTarget.value)}
       />
       <span className="err-msg">{errMsg}</span>
