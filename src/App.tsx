@@ -1,10 +1,11 @@
 import "./App.css";
 import Title from "./components/Title";
 import QQInput from "./components/QQInput";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import UserGrid from "./components/UserGrid";
 import { useRequest } from "ahooks";
 import { getUserByQQ } from "./api/user";
+import LoadingTip from "./components/LoadingTip";
 
 // const mockUser: User = {
 //   name: "留白",
@@ -16,19 +17,21 @@ function App() {
   // 接口返回的用户信息
   const [user, setUser] = useState<User>();
 
-  const onChange = useCallback(async (value: string) => {
-    try {
-      const newUser = await getUserByQQ(value);
-      setUser(newUser);
-    } catch (e) {
+  const { run: getUserByQQRun, loading } = useRequest(getUserByQQ, {
+    manual: true,
+    onSuccess(res: User) {
+      setUser(res);
+    },
+    onError(e) {
       alert(e);
-    }
-  }, []);
+    },
+  });
 
   return (
     <div className="App">
       <Title text="QQ号查询" />
-      <QQInput onChange={onChange} />
+      <QQInput onChange={(v) => getUserByQQRun(v)} />
+      {loading && <LoadingTip text="查询中..." />}
       {user && <UserGrid user={user} />}
     </div>
   );

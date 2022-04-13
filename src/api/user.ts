@@ -1,3 +1,8 @@
+/**
+ * 根据 qq号获取用户信息
+ * @param qq
+ * @returns
+ */
 export async function getUserByQQ(qq: string): Promise<User> {
   return fetch(`/api/qq.info?qq=${qq}`)
     .then((response) => response.json())
