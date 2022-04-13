@@ -6,8 +6,8 @@
 
 ## 技术栈
 
-- react18 + webpack5 + TypeScript + ahooks + Sass + Css Module
-- 因为请求跨域，使用 koa 做请求转发
+- React18 + Webpack5 + TypeScript + ahooks + Sass + CSS Module
+- 因为请求跨域，使用 Koa 做请求转发
 
 ## 快速上手
 
